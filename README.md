@@ -1,4 +1,4 @@
-# yelp-on
+# bowlish
 A full stack JavaScript app using `MERN` Stack `MongoDB` + `Express.js` + `React` + `Node.js` + `flux` + `Web Sockets`
 
 ## Live Demo
