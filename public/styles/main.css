@@ -1,0 +1,11 @@
+.centered {
+  margin: 0px auto; }
+
+body {
+  margin: 20px;
+  background: linear-gradient(to bottom, #282c34 0%, #444851 100%) fixed; }
+
+.hidden {
+  display: none !important; }
+
+/*# sourceMappingURL=main.css.map */
