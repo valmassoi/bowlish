@@ -17,16 +17,15 @@ export default class Home extends React.Component {
   }
 
   componentWillMount() {
-    let cards = StockStore.getCards()
-    this.setState({ cards })
-    StockStore.on("change", this.getSOMETHING.bind(this))
+    this.updateCards()
+    StockStore.on("change", this.updateCards.bind(this))
   }
 
   componentWillUnmount() {
     StockStore.removeAllListeners("change")
   }
 
-  getSOMETHING() {
+  updateCards() {
     let cards = StockStore.getCards()
     this.setState({ cards })
   }

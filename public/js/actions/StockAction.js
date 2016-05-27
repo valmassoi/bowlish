@@ -8,8 +8,10 @@ export function addCard(symbol) {
  $.getJSON(url, (json) => {
    dispatcher.dispatch({ type: "ADD_CARD", symbol, json })
  }).done((json) => {
-   console.log("done")   
- }).fail(function(jqXHR, textStatus, errorThrown) { alert('getJSON request failed! ' + textStatus) })
+   dispatcher.dispatch({ type: "GOT_DATA"})
+ }).fail((jqXHR, textStatus, errorThrown) => {
+   alert('Stock Data Fetch Failed: ' + textStatus)
+ })
 }
 
 export function deleteCard(symbol) {

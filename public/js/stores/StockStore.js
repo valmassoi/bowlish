@@ -8,11 +8,26 @@ class StockStore extends EventEmitter {
   constructor() {
     super()
     this.stocks = [
-      {symbol:"AAPL", descr:"Lorem ispum Lorem ispum Lorem ispum Lorem ispum Lorem ispum"},
-      {symbol:"ABC",descr:"Lorem ispum Lorem ispum Lorem ispum Lorem ispum Lorem ispum"},
-      {symbol:"GOOG",descr:"Lorem ispum Lorem ispum Lorem ispum Lorem ispum Lorem ispum"},
-      {symbol:"FB",descr:"Lorem ispum Lorem ispum Lorem ispum Lorem ispum Lorem ispum"}
+      // {symbol:"AAPL", descr:"Lorem ispum Lorem ispum Lorem ispum Lorem ispum Lorem ispum"},
+      // {symbol:"ABC",descr:"Lorem ispum Lorem ispum Lorem ispum Lorem ispum Lorem ispum"},
+      // {symbol:"GOOG",descr:"Lorem ispum Lorem ispum Lorem ispum Lorem ispum Lorem ispum"},
+      // {symbol:"FB",descr:"Lorem ispum Lorem ispum Lorem ispum Lorem ispum Lorem ispum"}
     ]
+    this.data =
+    [
+
+    ]
+  }
+
+  getData() {
+    return this.data
+  }
+
+  addData(symbol, data) {
+    this.data.unshift({
+      symbol,
+      data
+    })
   }
 
   getCards() {
@@ -37,14 +52,20 @@ class StockStore extends EventEmitter {
     switch(action.type) {
       case "ADD_CARD": {
         this.addCard(symbol, json.descr)
+        this.addData(symbol, json.data)
+        this.emit("change")
+        break
+      }
+      case "GOT_DATA": {
+        this.emit("data_change")
         break
       }
       case "DELETE_CARD": {
         this.deleteCard(symbol);
+        this.emit("change")
         break
       }
     }
-    this.emit("change")
   }
 }
 const stockStore = new StockStore

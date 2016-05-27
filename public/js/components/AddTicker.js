@@ -20,20 +20,7 @@ export default class AddTicker extends React.Component {
     let { ticker } = this.state
     console.log("searching for", this.state.ticker);
     StockAction.addCard(ticker)
-    // const apiKey = ''
-    // const quandlUrl = 'https://www.quandl.com/api/v3';
-    // const symbol = this.state.ticker
-    // const baseUrl = `${quandlUrl}/datasets/WIKI/${symbol}.json`;
-    // const collapse = 'collapse=monthly';
-    // const date = 'start_date=2015-01-01&end_date=2016-01-01';
-    // const fullUrl = `${baseUrl}?${collapse}&${date}&order=asc&api_key=${apiKey}`;
-    // console.log(fullUrl);
-    //
-    //
-    // $.getJSON(fullUrl, (data) => {
-    //     console.log(data);
-    // })
-
+    e.target.reset()
   }
 
   render() {
