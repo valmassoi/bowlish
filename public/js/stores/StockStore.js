@@ -19,10 +19,10 @@ class StockStore extends EventEmitter {
     return this.stocks
   }
 
-  addCard(symbol) {
+  addCard(symbol, json) {
     this.stocks.unshift({
       symbol,
-      descr: Date.now()//HACK
+      descr: json//HACK
     })
   }
 
@@ -35,7 +35,7 @@ class StockStore extends EventEmitter {
   console.log(action.type);
     switch(action.type) {
       case "ADD_CARD": {
-        this.addCard(action.symbol)
+        this.addCard(action.symbol, action.json)
         break
       }
       case "DELETE_CARD": {

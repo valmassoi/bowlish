@@ -20,9 +20,9 @@ function getStockData(symbol, callback) {
         fullUrl = `${baseUrl}?${collapse}&${date}&order=asc&api_key=${apiKey}`
   console.log(fullUrl)
   axios.get(fullUrl).then(res => {
-    let { name } = res.data.dataset
-    console.log(name)
-    callback(name)
+    let { name: descr, data } = res.data.dataset
+    console.log(descr)
+    callback(descr)
   })
   .catch(err => {
     console.log("err")
@@ -33,10 +33,9 @@ function getStockData(symbol, callback) {
 stockRouter.get('/:symbol', (req, res) => {
   let { symbol } = req.params
   res.writeHead(200, { "Content-Type": "application/json" })
-  getStockData(symbol, (name) => {
-    res.end(JSON.stringify(name))
+  getStockData(symbol, (descr) => {
+    res.end(JSON.stringify(descr))
   })
-  // res.end(symbol)
 })
 
 module.exports = stockRouter

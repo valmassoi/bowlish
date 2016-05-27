@@ -7,9 +7,9 @@ export function addCard(symbol) {
  const url = local+'/api/stocks/'+symbol
  $.getJSON(url, (json) => {
    dispatcher.dispatch({type: "RECEIVE_STOCK", json})
- }).done(() => {
+ }).done((json) => {
    console.log("done");
-   dispatcher.dispatch({ type: "ADD_CARD", symbol })
+   dispatcher.dispatch({ type: "ADD_CARD", symbol, json })
  }).fail(function(jqXHR, textStatus, errorThrown) { alert('getJSON request failed! ' + textStatus) })
 }
 
