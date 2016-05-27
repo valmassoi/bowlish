@@ -21,8 +21,21 @@ function getStockData(symbol, callback) {
   console.log(fullUrl)
   axios.get(fullUrl).then(res => {
     let { name: descr, data } = res.data.dataset
-    console.log(descr)
-    callback(descr)
+    let abstraction = [ ]
+    data.forEach((array) =>
+      abstraction.push(
+        array.filter((value) => {
+          return (value == array[0] || value == array[4])
+        }).map((value)=> {
+          if (value == array[0])
+            return new Date(value).getTime()
+          if (value == array[4])
+            return value
+        }).slice(0,2)
+      )
+    )
+    console.log(abstraction[0])
+    callback(descr, abstraction)
   })
   .catch(err => {
     console.log("err")
@@ -33,8 +46,8 @@ function getStockData(symbol, callback) {
 stockRouter.get('/:symbol', (req, res) => {
   let { symbol } = req.params
   res.writeHead(200, { "Content-Type": "application/json" })
-  getStockData(symbol, (descr) => {
-    res.end(JSON.stringify(descr))
+  getStockData(symbol, (descr, data) => {
+    res.end(JSON.stringify({ descr, data }))
   })
 })
 
