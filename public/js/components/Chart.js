@@ -32,7 +32,7 @@ export default class Chart extends React.Component {
         selected: 4
       }),
       title: {
-        text: 'Closing Stock Price',
+        text: 'Closing Stock Prices',
         style: {
            color: '#E0E0E3',
            fontSize: '20px'

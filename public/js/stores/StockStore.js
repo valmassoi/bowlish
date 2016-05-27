@@ -8,10 +8,10 @@ class StockStore extends EventEmitter {
   constructor() {
     super()
     this.stocks = [
-      {symbol:"AAPL", descr:"Apple Inc (AAPL) Prices, Dividends, Splits and Trading Volume"},
-      {symbol:"ABC",descr:"Lorem ispum"},
-      {symbol:"GOOG",descr:"Alphabet Inc (GOOG) Prices, Dividends, Splits and Trading Volume"},
-      {symbol:"FB",descr:"Facebook Inc. (FB) Prices, Dividends, Splits and Trading Volume"}
+      {symbol:"AAPL", descr:"Lorem ispum Lorem ispum Lorem ispum Lorem ispum Lorem ispum"},
+      {symbol:"ABC",descr:"Lorem ispum Lorem ispum Lorem ispum Lorem ispum Lorem ispum"},
+      {symbol:"GOOG",descr:"Lorem ispum Lorem ispum Lorem ispum Lorem ispum Lorem ispum"},
+      {symbol:"FB",descr:"Lorem ispum Lorem ispum Lorem ispum Lorem ispum Lorem ispum"}
     ]
   }
 
@@ -29,16 +29,13 @@ class StockStore extends EventEmitter {
   deleteCard(symbol) {
     console.log("pulling", symbol);
     _.pullAllBy(this.stocks, [{symbol}], 'symbol')
-
   }
 
   handleActions(action) {
   console.log(action.type);
     switch(action.type) {
       case "ADD_CARD": {
-        console.log(action.symbol);
         this.addCard(action.symbol)
-        // this.emit("change")
         break
       }
       case "DELETE_CARD": {
