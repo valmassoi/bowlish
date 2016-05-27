@@ -4,27 +4,31 @@ import _ from 'lodash'
 import Chart from '../components/Chart'
 import TickerCard from '../components/TickerCard'
 import AddTicker from '../components/AddTicker'
+import StockStore from '../stores/StockStore'
+import * as StockAction from '../actions/StockAction'
 
 export default class Home extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      cards:[
-        {title:"AAPL", descr:"Apple Inc (AAPL) Prices, Dividends, Splits and Trading Volume"},
-        {title:"ABC",descr:"Lorem ispum"},
-        {title:"GOOG",descr:"Alphabet Inc (GOOG) Prices, Dividends, Splits and Trading Volume"},
-        {title:"FB",descr:"Facebook Inc. (FB) Prices, Dividends, Splits and Trading Volume"}
-      ]
+      cards:[ ]
     }
   }
 
   componentWillMount() {
-
+    let cards = StockStore.getCards()
+    this.setState({ cards })
+    StockStore.on("change", this.getSOMETHING.bind(this))
   }
 
   componentWillUnmount() {
+    StockStore.removeAllListeners("change")
+  }
 
+  getSOMETHING() {
+    let cards = StockStore.getCards()
+    this.setState({ cards })
   }
 
   render() {
@@ -38,10 +42,10 @@ export default class Home extends React.Component {
         <div class="container-fluid" style={{marginTop: '20px'}}>
           <div class="row">
             {this.state.cards.map( (card, i) => {
-              let { title, descr } = card
+              let { symbol, descr } = card
               return (
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" key={"card-div-"+i}>
-                  <TickerCard title={title} descr={descr} />
+                  <TickerCard symbol={symbol} descr={descr} />
                 </div>
               )
             })}

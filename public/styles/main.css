@@ -19,7 +19,7 @@ body {
   border-width: 1px 1px 1px 5px;
   border-color: #999; }
   .tickercard:hover {
-    border-color: #999 #999 #999 orange; }
+    border-color: #999 #999 #999 steelblue; }
   .tickercard .remove-btn {
     color: #999 !important; }
     .tickercard .remove-btn:hover {
