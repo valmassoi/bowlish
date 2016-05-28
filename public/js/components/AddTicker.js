@@ -1,6 +1,7 @@
 import React from "react"
 import * as StockAction from '../actions/StockAction'
-// import $ from 'jquery'
+import io from 'socket.io-client'
+const socket = io(`http://192.168.1.108:8081/`)//HACK
 
 export default class AddTicker extends React.Component {
   constructor() {
@@ -15,10 +16,11 @@ export default class AddTicker extends React.Component {
     let ticker = e.target.value
     this.setState({ ticker })
   }
-  search(e) {
+  search(e) {//TODO CHECK FOR VALID FIRST
     e.preventDefault(e)
     let { ticker } = this.state
-    console.log("searching for", this.state.ticker);
+    console.log("searching for", this.state.ticker)
+    socket.emit('add stock', ticker)
     StockAction.addCard(ticker)
     e.target.reset()
   }

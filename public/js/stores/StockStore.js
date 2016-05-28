@@ -62,7 +62,6 @@ class StockStore extends EventEmitter {
       case "DELETE_CARD": {
         this.deleteCard(symbol)
         this.emit("change")
-        // this.deleteData(symbol)
         this.emit("data_remove")
         break
       }

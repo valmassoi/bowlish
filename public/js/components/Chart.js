@@ -3,7 +3,6 @@ import Highcharts from 'highcharts/highstock'
 import ChartTheme from '../utilities/ChartTheme'
 import TempData from '../utilities/TempData'//HACK
 import StockStore from '../stores/StockStore'
-import $ from 'jquery'
 
 export default class Chart extends React.Component {
   constructor() {

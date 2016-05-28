@@ -1,5 +1,7 @@
 import React from "react"
 import * as StockAction from '../actions/StockAction'
+import io from 'socket.io-client'
+const socket = io(`http://192.168.1.108:8081/`)//HACK
 
 export default class TickerCard extends React.Component {
   constructor() {
@@ -10,7 +12,8 @@ export default class TickerCard extends React.Component {
   }
 
   delete(symbol) {
-    console.log("delete ", symbol);
+    console.log("delete ", symbol)
+    socket.emit('rm stock', symbol)
     StockAction.deleteCard(symbol)
   }
 

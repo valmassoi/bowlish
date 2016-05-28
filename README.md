@@ -1,5 +1,5 @@
 # bowlish
-A full stack JavaScript app using `MERN` Stack `MongoDB` + `Express.js` + `React` + `Node.js` + `flux` + `Web Sockets`
+A full stack JavaScript app using `Express.js` + `React` + `Node.js` + `flux` + `Web Sockets`
 
 ## Live Demo
 Hosted at https://bowlish.herokuapp.com
