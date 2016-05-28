@@ -7,19 +7,21 @@ import dispatcher from '../dispatcher'
 class StockStore extends EventEmitter {
   constructor() {
     super()
-    this.stocks = [
-      // {symbol:"AAPL", descr:"Lorem ispum Lorem ispum Lorem ispum Lorem ispum Lorem ispum"},//HACK
-      // {symbol:"ABC",descr:"Lorem ispum Lorem ispum Lorem ispum Lorem ispum Lorem ispum"},
-      // {symbol:"GOOG",descr:"Lorem ispum Lorem ispum Lorem ispum Lorem ispum Lorem ispum"},
-      // {symbol:"FB",descr:"Lorem ispum Lorem ispum Lorem ispum Lorem ispum Lorem ispum"}
-    ]
-    this.data = [
-
-    ]
+    this.stocks = [ ]
+    this.data = [ ]
+    this.deleteSymbol = ""
   }
 
   getData() {
     return this.data
+  }
+
+  getCards() {
+    return this.stocks
+  }
+
+  getDeleteSymbol() {
+    return this.deleteSymbol
   }
 
   addData(symbol, data) {
@@ -27,16 +29,6 @@ class StockStore extends EventEmitter {
       symbol,
       data
     })
-  }
-
-  // deleteData(symbol) {
-  //   console.log("deleting data", symbol)
-  //   console.log(this.data)
-  //
-  // }
-
-  getCards() {
-    return this.stocks
   }
 
   addCard(symbol, descr) {
@@ -48,7 +40,7 @@ class StockStore extends EventEmitter {
 
   deleteCard(symbol) {
     console.log("pulling", symbol)
-    console.log(this.stocks)
+    this.deleteSymbol = symbol
     _.pullAllBy(this.stocks, [{symbol}], 'symbol')
     _.pullAllBy(this.data, [{symbol}], 'symbol')
   }
@@ -64,14 +56,14 @@ class StockStore extends EventEmitter {
         break
       }
       case "GOT_DATA": {
-        this.emit("data_change")
+        this.emit("data_add")
         break
       }
       case "DELETE_CARD": {
         this.deleteCard(symbol)
         this.emit("change")
         // this.deleteData(symbol)
-        this.emit("data_change")
+        this.emit("data_remove")
         break
       }
     }

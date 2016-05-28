@@ -17,11 +17,22 @@ export default class Chart extends React.Component {
   componentWillMount() {
     let data = StockStore.getData()
     this.setState({ data })
-    StockStore.on("data_change", this.updateChart.bind(this))
+    StockStore.on("data_add", this.updateChart.bind(this))
+    StockStore.on("data_remove", this.removeSeries.bind(this))
   }
 
   componentWillUnmount() {
-    StockStore.removeAllListeners("data_change")
+    StockStore.removeAllListeners()
+  }
+
+  removeSeries() {
+    let symbol = StockStore.getDeleteSymbol(),
+        chart = this.state.chart
+    chart.series.forEach((series) => {
+      if(series.name==symbol)
+        series.remove(true)
+      }
+    )
   }
 
   updateChart() {
@@ -29,16 +40,14 @@ export default class Chart extends React.Component {
     // this.setState({ data })
     console.log(data);
     let chart = this.state.chart
-    let series = {
+    let siri = {
       name: [data[0].symbol],
       data: data[0].data
     }
-    chart.addSeries(series,true)
-    let nav = chart.get('navigator');
-    nav.setData(series.data);
-    chart.xAxis[0].setExtremes();
-    // chart.series[0].setData({name:data[0].symbol,data:data[0].data},true)
-    // chart.redraw()
+    chart.addSeries(siri,true)
+    let nav = chart.get('navigator')
+    nav.setData(siri.data)
+    chart.xAxis[0].setExtremes()
     this.setState({chart})
   }
 
