@@ -10,7 +10,7 @@ export default class Chart extends React.Component {
     super()
     this.state = {
       chart: null,
-      data: [ ]//HACK? DELETE?
+      // data: [ ]//HACK? DELETE?
     }
   }
 
@@ -58,7 +58,7 @@ export default class Chart extends React.Component {
   }
 
   setConfig() {
-    let data = this.state.data
+    let data = [ ]//this.state.data
     // let data = TempData.main()//HACK
     let rangeTheme = ChartTheme.rangeSelectorTheme()
     let config = {
