@@ -38,7 +38,7 @@ const io = require('socket.io')(server)
 io.sockets.on('connection', (socket) => {
   console.log("connected to sockets" + socket.id)
   socket.on('add stock', (symbol) => {
-    io.emit('add stock', symbol)
+    io.emit('add stock', symbol)//FIX broadcast
   })
   socket.on('rm stock', (symbol) => {
     io.emit('rm stock', symbol)

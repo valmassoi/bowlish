@@ -1,7 +1,7 @@
 import React from "react"
 import * as StockAction from '../actions/StockAction'
 import io from 'socket.io-client'
-const socket = io(`http://192.168.1.108:8081/`)//HACK
+const socket = io()//HACK FIX -> creates 3x
 
 export default class TickerCard extends React.Component {
   constructor() {

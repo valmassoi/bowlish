@@ -7,7 +7,7 @@ import AddTicker from '../components/AddTicker'
 import StockStore from '../stores/StockStore'
 import * as StockAction from '../actions/StockAction'
 import io from 'socket.io-client'
-const socket = io(`http://192.168.1.108:8081/`)//HACK
+const socket = io()//HACK
 
 export default class Home extends React.Component {
 
@@ -20,7 +20,7 @@ export default class Home extends React.Component {
 
   componentWillMount() {
     this.updateCards()
-    socket.on("add stock", (symbol) => {
+    socket.on("add stock", symbol => {
       console.log("socket add")
       StockAction.addCard(symbol)
     })
