@@ -17,7 +17,8 @@ function getStockData(symbol, callback) {
         baseUrl = `${quandlUrl}/datasets/WIKI/${symbol}.json`,
         collapse = 'collapse=daily',
         date = `start_date=${yyyy-1}-${mm}-01&end_date=${yyyy}-${mm}-${dd}`,
-        fullUrl = `${baseUrl}?${collapse}&${date}&order=asc&api_key=`+apiKey
+        fullUrl = `${baseUrl}?${collapse}&${date}&order=asc&api_key=${apiKey}`
+  fullUrl = fullUrl.replace(/\s+/g, '')
   console.log(fullUrl)
   axios.get(fullUrl).then(res => {
     let { name: descr, data } = res.data.dataset
