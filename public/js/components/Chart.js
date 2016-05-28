@@ -1,6 +1,7 @@
 import React from "react"
 import Highcharts from 'highcharts/highstock'
 import ChartTheme from '../utilities/ChartTheme'
+import TempData from '../utilities/TempData'//HACK
 import StockStore from '../stores/StockStore'
 import $ from 'jquery'
 
@@ -9,7 +10,7 @@ export default class Chart extends React.Component {
     super()
     this.state = {
       chart: null,
-      data: [[0,0]]
+      data: [ ]//HACK? DELETE?
     }
   }
 
@@ -26,13 +27,18 @@ export default class Chart extends React.Component {
   updateChart() {
     let data = StockStore.getData()
     // this.setState({ data })
-    // console.log(data[0].data);
+    console.log(data);
     let chart = this.state.chart
     let series = {
       name: [data[0].symbol],
       data: data[0].data
     }
     chart.addSeries(series,true)
+    let nav = chart.get('navigator');
+    nav.setData(series.data);
+    chart.xAxis[0].setExtremes();
+    // chart.series[0].setData({name:data[0].symbol,data:data[0].data},true)
+    // chart.redraw()
     this.setState({chart})
   }
 
@@ -44,6 +50,7 @@ export default class Chart extends React.Component {
 
   setConfig() {
     let data = this.state.data
+    // let data = TempData.main()//HACK
     let rangeTheme = ChartTheme.rangeSelectorTheme()
     let config = {
       rangeSelector: Object.assign(rangeTheme, {
@@ -57,14 +64,20 @@ export default class Chart extends React.Component {
         }
       },
       series: [
-        // {name: ['AAPL'],
+        // {name: ['AAPL'],//HACK
         // data: data[0]},
         // {name: ['GOOG'],
         // data: data[1]},
         {tooltip: {
           valueDecimals: 2
         }}
-      ]
+      ],
+      navigator: {
+                enabled: true,
+                series: {
+                    id: 'navigator'
+                }
+      },
     }
     return config
   }
