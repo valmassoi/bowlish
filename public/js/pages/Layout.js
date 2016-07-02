@@ -1,19 +1,15 @@
-import React from "react"
-import { Link } from "react-router"
+import React from 'react'
+import Footer from '../components/Footer'
+import Nav from '../components/Nav'
 
-import Footer from "../components/Footer"
-import Nav from "../components/Nav"
-
-export default class Layout extends React.Component {
-
-  render() {
-    const { location } = this.props
-    return(
-      <div>
-        <Nav location={location} />
-        {this.props.children}
-        <Footer />
-      </div>
-    )
-  }
+const Layout = ({ location, children }) => {
+  return (
+    <div>
+      <Nav location={location} />
+      {children}
+      <Footer />
+    </div>
+  )
 }
+
+export default Layout

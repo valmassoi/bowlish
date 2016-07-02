@@ -1,9 +1,6 @@
-import React from "react"
-import { IndexLink, Link } from "react-router"
+import React, { Component } from 'react'
 
-// import createHashHistory from 'history/lib/createHashHistory'
-
-export default class Nav extends React.Component {
+export default class Nav extends Component {
   constructor() {
     super()
     this.state = {
@@ -11,17 +8,8 @@ export default class Nav extends React.Component {
     }
   }
 
-  componentWillMount() {
-
-  }
-
-  componentWillUnmount() {
-
-  }
-
-  render(){
-
-    return(
+  render() {
+    return (
       <h1> Bowlish </h1>
     )
   }

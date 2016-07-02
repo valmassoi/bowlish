@@ -1,5 +1,4 @@
 import { EventEmitter } from 'events'
-// import $ from 'jquery'
 import _ from 'lodash'
 
 import dispatcher from '../dispatcher'
@@ -7,9 +6,9 @@ import dispatcher from '../dispatcher'
 class StockStore extends EventEmitter {
   constructor() {
     super()
-    this.stocks = [ ]
-    this.data = [ ]
-    this.deleteSymbol = ""
+    this.stocks = []
+    this.data = []
+    this.deleteSymbol = ''
   }
 
   getData() {
@@ -27,44 +26,43 @@ class StockStore extends EventEmitter {
   addData(symbol, data) {
     this.data.unshift({
       symbol,
-      data
+      data,
     })
   }
 
   addCard(symbol, descr) {
     this.stocks.unshift({
       symbol,
-      descr
+      descr,
     })
   }
 
   deleteCard(symbol) {
-    console.log("pulling", symbol)
     this.deleteSymbol = symbol
-    _.pullAllBy(this.stocks, [{symbol}], 'symbol')
-    _.pullAllBy(this.data, [{symbol}], 'symbol')
+    _.pullAllBy(this.stocks, [{ symbol }], 'symbol')
+    _.pullAllBy(this.data, [{ symbol }], 'symbol')
   }
 
   handleActions(action) {
-  console.log(action.type)
-  let { symbol, json } = action
-    switch(action.type) {
-      case "ADD_CARD": {
+    const { symbol, json } = action
+    switch (action.type) {
+      case 'ADD_CARD': {
         this.addCard(symbol, json.descr)
         this.addData(symbol, json.data)
-        this.emit("change")
+        this.emit('change')
         break
       }
-      case "GOT_DATA": {
-        this.emit("data_add")
+      case 'GOT_DATA': {
+        this.emit('data_add')
         break
       }
-      case "DELETE_CARD": {
+      case 'DELETE_CARD': {
         this.deleteCard(symbol)
-        this.emit("change")
-        this.emit("data_remove")
+        this.emit('change')
+        this.emit('data_remove')
         break
       }
+      default:
     }
   }
 }
