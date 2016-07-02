@@ -1,11 +1,11 @@
-var debug = process.env.NODE_ENV !== "production"
-var webpack = require('webpack')
-var path = require('path')
+const debug = process.env.NODE_ENV !== 'production'
+const webpack = require('webpack')
+const path = require('path')
 
 module.exports = {
-  context: path.join(__dirname, "public"),
-  devtool: debug ? "inline-sourcemap" : null,
-  entry: "./js/routes.js",
+  context: path.join(__dirname, 'public'),
+  devtool: debug ? 'inline-sourcemap' : null,
+  entry: './js/routes.js',
   module: {
     loaders: [
       {
@@ -15,25 +15,25 @@ module.exports = {
         query: {
           presets: ['react', 'es2015', 'stage-0'],
           plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
-        }
+        },
       },
       {
         test: /\.sass$/,
         exclude: /(node_modules|bower_components)/,
-        loader: ["style", "css", "sass"]
+        loader: ['style', 'css', 'sass'],
       },
       {
-        test   :  /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        loader : 'file-loader'
-      }
-    ]
+        test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        loader: 'file-loader',
+      },
+    ],
   },
   sassLoader: {
-    includePaths: [path.resolve(__dirname, "./public/styles")]
+    includePaths: [path.resolve(__dirname, './public/styles')],
   },
   output: {
-    path: __dirname + "/public/",
-    filename: "routes.min.js"
+    path: __dirname + '/public/',
+    filename: 'routes.min.js',
   },
   plugins: debug ? [] : [
     new webpack.optimize.DedupePlugin(),
