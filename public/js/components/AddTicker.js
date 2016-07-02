@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import io from 'socket.io-client'
-const socket = io('http://192.168.1.108:8081/')// HACK FIX -> creates 3x
+const socket = io() // HACK FIX -> creates 3x
 
 export default class AddTicker extends Component {
   constructor() {
